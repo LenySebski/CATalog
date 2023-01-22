@@ -49,6 +49,7 @@ export const createPost = async (req, res, next) => {
 				imagesURL: req.body?.imagesURL,
 			},
 		});
+		res.status(201);
 		res.json(post);
 	} catch (e) {
 		e.type = "input";
@@ -111,6 +112,27 @@ export const deletePost = async (req, res, next) => {
 			},
 		});
 		res.json(post);
+	} catch (e) {
+		next(e);
+	}
+};
+
+export const getPostsByUser = async (req, res, next) => {
+	try {
+		const posts = await prisma.post.findMany({
+			where: {
+				postedById: req.params.id,
+			},
+		});
+		if (posts.length === 0) {
+			const err = new Error("No posts found.");
+			err.type = "input";
+			err.code = 400;
+			next(err);
+		} else {
+			res.status(200);
+			res.json(posts);
+		}
 	} catch (e) {
 		next(e);
 	}
