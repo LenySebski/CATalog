@@ -1,7 +1,7 @@
 import React from 'react';
 import './Style.scss'
 import Navbar from './Components/Navbar';
-import Cats from './Images/Cats.jpg';
+//import Cats from './Images/Cats.jpg';
 
 
 function App() {
