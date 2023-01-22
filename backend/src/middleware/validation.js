@@ -40,4 +40,20 @@ export const signInValidation = [
 
 export const createPostValidation = [
 	body("title").trim().isLength({ min: 1 }).withMessage("Title is required."),
+	body("description")
+		.optional()
+		.isString()
+		.withMessage("Description must be a string"),
+	body("district")
+		.optional()
+		.trim()
+		.isLength({ eq: 3 })
+		.withMessage("District code must be 3 characters long"),
+	body("status")
+		.isIn(["LOST", "FOUND", "ARCHIVED"])
+		.withMessage("Status must be either LOST, FOUND or ARCHIVED"),
+	body("imagesURL")
+		.optional()
+		.isArray()
+		.withMessage("ImagesURL must be an array of strings"),
 ];
