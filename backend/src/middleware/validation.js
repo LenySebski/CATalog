@@ -37,3 +37,7 @@ export const signInValidation = [
 		.isLength({ min: 1 })
 		.withMessage("Password is required."),
 ];
+
+export const createPostValidation = [
+	body("title").trim().isLength({ min: 1 }).withMessage("Title is required."),
+];

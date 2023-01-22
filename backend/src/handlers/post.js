@@ -8,3 +8,110 @@ export const getPosts = async (req, res, next) => {
 		next(e);
 	}
 };
+
+export const getOriginalPoster = async (req, res, next) => {
+	try {
+		const post = await prisma.post.findUnique({
+			where: { id: req.params.id },
+			select: {
+				postedById: true,
+			},
+		});
+
+		next(post);
+	} catch (e) {
+		next(e);
+	}
+};
+
+export const getPost = async (req, res, next) => {
+	try {
+		const post = await prisma.post.findUnique({
+			where: { id: req.params.id },
+		});
+		res.json(post);
+	} catch (e) {
+		next(e);
+	}
+};
+
+export const createPost = async (req, res, next) => {
+	console.log("req.user: ", req.user);
+	try {
+		console.log(req.user);
+		const post = await prisma.post.create({
+			data: {
+				title: req.body.title,
+				description: req.body?.description,
+				district: req.body?.district,
+				status: req.body?.status,
+				postedById: req.user.id,
+				imagesURL: req.body?.imagesURL,
+			},
+		});
+		res.json(post);
+	} catch (e) {
+		e.type = "input";
+		next(e);
+	}
+};
+
+export const checkIfEditable = async (req, res, next) => {
+	try {
+		const post = await prisma.post.findUnique({
+			where: {
+				id_postedById: {
+					id: req.params.id,
+					postedById: req.user.id,
+				},
+			},
+		});
+		if (post) {
+			next();
+		} else if (req.user.role === "ADMIN") {
+			next();
+		} else {
+			const err = new Error("You are not authorized to edit this post");
+			err.type = "auth";
+			err.code = 401;
+			next(err);
+		}
+	} catch (e) {
+		next(e);
+	}
+};
+
+export const updatePost = async (req, res, next) => {
+	try {
+		const post = await prisma.post.update({
+			where: {
+				id: req.params.id,
+			},
+			data: {
+				title: req.body.title,
+				description: req.body?.description,
+				district: req.body?.district,
+				status: req.body?.status,
+				postedById: req.user.id,
+				imagesURL: req.body?.imagesURL,
+			},
+		});
+		res.json(post);
+	} catch (e) {
+		e.type = "input";
+		next(e);
+	}
+};
+
+export const deletePost = async (req, res, next) => {
+	try {
+		const post = await prisma.post.delete({
+			where: {
+				id: req.params.id,
+			},
+		});
+		res.json(post);
+	} catch (e) {
+		next(e);
+	}
+};
