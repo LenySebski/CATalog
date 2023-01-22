@@ -25,6 +25,21 @@ export const signUpValidation = [
 		.withMessage(
 			"Password is too weak. Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter and one number."
 		),
+	body("email")
+		.optional()
+		.isEmail()
+		.withMessage("Email is invalid. Please enter a valid email address."),
+	body("phone")
+		.optional()
+		.isMobilePhone()
+		.withMessage(
+			"Phone number is invalid. Please enter a valid phone number."
+		),
+	body("name")
+		.optional()
+		.isString()
+		.isLength({ min: 1 })
+		.withMessage("Name has to be a string and cannot be empty."),
 ];
 
 export const signInValidation = [
