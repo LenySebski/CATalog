@@ -12,7 +12,7 @@ export const getPosts = async (req, res, next) => {
 export const getOriginalPoster = async (req, res, next) => {
 	try {
 		const post = await prisma.post.findUnique({
-			where: { id: req.params.id },
+			where: { id: req.params.postId },
 			select: {
 				postedById: true,
 			},
@@ -27,7 +27,7 @@ export const getOriginalPoster = async (req, res, next) => {
 export const getPost = async (req, res, next) => {
 	try {
 		const post = await prisma.post.findUnique({
-			where: { id: req.params.id },
+			where: { id: req.params.postId },
 		});
 		res.json(post);
 	} catch (e) {
@@ -62,7 +62,7 @@ export const checkIfEditable = async (req, res, next) => {
 		const post = await prisma.post.findUnique({
 			where: {
 				id_postedById: {
-					id: req.params.id,
+					id: req.params.postId,
 					postedById: req.user.id,
 				},
 			},
@@ -86,7 +86,7 @@ export const updatePost = async (req, res, next) => {
 	try {
 		const post = await prisma.post.update({
 			where: {
-				id: req.params.id,
+				id: req.params.postId,
 			},
 			data: {
 				title: req.body.title,
@@ -108,7 +108,7 @@ export const deletePost = async (req, res, next) => {
 	try {
 		const post = await prisma.post.delete({
 			where: {
-				id: req.params.id,
+				id: req.params.postId,
 			},
 		});
 		res.json(post);
@@ -121,7 +121,7 @@ export const getPostsByUser = async (req, res, next) => {
 	try {
 		const posts = await prisma.post.findMany({
 			where: {
-				postedById: req.params.id,
+				postedById: req.params.userId,
 			},
 		});
 		if (posts.length === 0) {

@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 	res.json({ message: "hello" });
 	res.status(200);
 });
-app.use("/posts/:id", getPostsByUser);
+app.use("/posts/:userId", getPostsByUser);
 app.use("/posts", getPosts);
 app.use("/api", protect, router);
 app.post("/signup", [signUpValidation, handleInputErrors], createNewUser);

@@ -23,12 +23,12 @@ router.delete("/user/:id", () => {});
 
 /**Get/Update Post */
 router.post("/post", [createPostValidation, handleInputErrors], createPost);
-router.get("/post/:id", getPost);
+router.get("/post/:postId", getPost);
 router.put(
-	"/post/:id",
+	"/post/:postId",
 	[createPostValidation, handleInputErrors, checkIfEditable],
 	updatePost
 );
-router.delete("/post/:id", checkIfEditable, deletePost);
+router.delete("/post/:postId", checkIfEditable, deletePost);
 
 export default router;
