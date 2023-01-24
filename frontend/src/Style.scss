@@ -1,3 +1,13 @@
+$colors: (
+    primary: #f1faee,
+    secondary: #457b9d,
+    text: #1d3557,
+);
+
+@function color($color-name) {
+    @return map-get($colors, $color-name)
+}
+
 //$primaryBtn: #457b9d
 
 // Navbar starts
@@ -13,46 +23,41 @@ header {
     align-items: center;
     justify-content: space-between;
     height: 80px;
-    padding: 0 2rem;
-    padding-bottom: 1rem;
-    background-color: #457b9d;
-    color: #f1faee;
+    background-color: color(secondary);
+    color: color(secondary);
+    font-size: 20px;
+}
+
+.logo {
+    margin-left: 4rem;
+}
+
+.navline {
+    height: 60px;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    margin-right: 4rem;
 }
 
 nav a {
-    margin: 0 2rem;
-    color: #f1faee;
+    margin: auto 1rem;
+    color: color(primary);
     text-decoration: none;
+    margin-top: 17px;
 }
 
 nav a:hover {
-    color: #a8dadc;
+    color: color(primary);
 }
 
-header .nav-btn {
-    padding: 5px;
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #f1faee;
-    visibility: hidden;
-    opacity: 0;
-    font-size: 1.8rem;
-  
+.signup {
+    font-weight: 600;
 }
 
 @media only screen and (max-width: 1024px){
-    header .nav-btn {
-        visibility: visible;
-        opacity: 1;
-        padding-top: 20px;
-    }
-
-    header .nav-btn:hover {
-        color: #a8dadc;
-    }
-
     header nav {
         position: fixed;
         top: 0;
@@ -64,19 +69,11 @@ header .nav-btn {
         align-items: center;
         justify-content: center; //centers links
         gap: 1.5rem;
-        background-color: #457b9d;
-        transition: 1s;
-        transform: translateY(-100vh);
+        background-color: color(secondary);
     }
 
     header .responsive_nav{
         transform: none;
-    }
-
-    nav .nav-close-btn {
-        position: absolute;
-        top: 2rem;
-        right: 2rem;
     }
 
     nav a {
@@ -86,9 +83,106 @@ header .nav-btn {
 // Navbar ends
 
 // Main Image starts
-.mainimg {
-    height: 130vh;
+.cats {
+    position: relative;
+    text-align: center;
+    height: 90vh;
     width: 100%;
     object-fit: cover;
 }
+
+.thetext {
+    position: absolute;
+    top: 150px;
+    right: 80px;
+    font-size: 88px;
+    font-weight: 400px;
+    letter-spacing: -7px;
+    color: color(primary);
+}
+
+.text1 {
+    font-size: 44px;
+    text-align: right;
+    letter-spacing: normal;
+}
+
+span {
+    font-weight: 700;
+}
+
 // Main Image ends
+
+// Buttons start
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Register {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10vh 10vh 10vh 10vh; //top, right, bottom, left
+    height: 123px;
+    width: 493px;
+    background-color: color(secondary);
+    border: none;
+    color: color(primary);
+    font-size: 24px;
+    border-radius: 5px;
+    //box-shadow:
+}
+
+.caticon {
+    margin-left: 30px;
+    height: 61px;
+    width: 68px;
+}
+
+.line1 {
+    height: 100px;
+    margin-left: -40px;
+}
+
+.register-text {
+    font-size: 40px;
+    font-weight: bold;
+    margin-right: 70px;
+    margin-left: 0px;
+}
+
+.Database {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10vh 10vh 10vh 10vh; //top, right, bottom, left
+    height: 123px;
+    width: 493px;
+    background-color: color(secondary);
+    border: none;
+    color: color(primary);
+    font-size: 24px;
+    border-radius: 5px;
+}
+
+.pawicon {
+    margin-left: 35px;
+    height: 87px;
+    width: 67px;
+}
+
+.line2 {
+    height: 100px;
+    margin-left: -10px;
+}
+
+.database-text {
+    font-size: 40px;
+    font-weight: bold;
+    margin-right: 60px;
+    margin-left: 0px;
+}

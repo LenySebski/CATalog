@@ -1,6 +1,8 @@
 import {useRef} from 'react';
 import {GiHamburgerMenu} from 'react-icons/gi';
 import {FaWindowClose} from 'react-icons/fa';
+import Logo from '../Images/Logo.png';
+import Line from '../Images/Line 5.png';
 
 function Navbar() {
     //The function of the button on click
@@ -10,22 +12,14 @@ function Navbar() {
     }
     return (
         <header>
-            <h3>Logo</h3>
+            <img className='logo' src={Logo}></img>
             <nav ref={navRef}>
-                <a href='/#'>Home</a>
-                <a href='/#'>Lost Pet</a>
-                <a href='/#'>Found Pet</a>
-                <a href='/#'>Pet Database</a>
-                <a href='/#'>Sign in</a>
-
-                <button className='nav-btn nav-close-btn' onClick={showNavbar}>
-                    <FaWindowClose/>
-                </button>
-
+                <a href='/#'>Register Cat</a>
+                <a href='/#'>Database</a>
+                <a href='/#'>Sign In</a>
+                <img className='navline' src={Line}></img>
+                <a className='signup' href='/#'>Sign Up!</a>
             </nav>
-                <button className='nav-btn' onClick={showNavbar}>
-                    <GiHamburgerMenu/>
-                </button>
         </header>
     );
 
