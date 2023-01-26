@@ -39,10 +39,11 @@ model Post {
   id          String   @id @default(uuid())
   createdAt   DateTime @default(now())
   postedBy    User     @relation(fields: [postedById], references: [id])
-  postedById String   @unique
+  postedById String   
   title        String  @db.VarChar(255)
   description  String?  @db.VarChar(255)
   district     String?  @db.VarChar(255)
   status        Status @default(LOST)
   imagesURL String[]
+  @@unique([id, postedById])
 }
