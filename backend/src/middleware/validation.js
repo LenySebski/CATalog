@@ -54,17 +54,17 @@ export const signInValidation = [
 ];
 
 export const createPostValidation = [
-	body("title").trim().isLength({ min: 1 }).withMessage("Title is required."),
-	body("description")
+	body("content")
 		.optional()
 		.isString()
-		.withMessage("Description must be a string"),
+		.withMessage("Content must be a string"),
 	body("district")
 		.optional()
 		.trim()
 		.isLength({ eq: 3 })
 		.withMessage("District code must be 3 characters long"),
 	body("status")
+	.optional()
 		.isIn(["LOST", "FOUND", "ARCHIVED"])
 		.withMessage("Status must be either LOST, FOUND or ARCHIVED"),
 	body("imagesURL")
