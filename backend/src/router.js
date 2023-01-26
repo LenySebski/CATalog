@@ -9,6 +9,17 @@ import { isAdmin } from "./middleware/auth.js";
 import {
 	handleInputErrors,
 	signUpValidation,
+import { body } from "express-validator";
+import {
+	checkIfEditable,
+	createPost,
+	deletePost,
+	getPost,
+	updatePost,
+} from "./handlers/post.js";
+import {
+	handleInputErrors,
+	createPostValidation,
 } from "./middleware/validation.js";
 const router = Router();
 
@@ -24,10 +35,13 @@ router.put(
 router.delete("/user/:userId", isUserEditable, deleteUser);
 
 /**Get/Update Post */
-router.get("/posts", () => {});
-router.post("/post", () => {});
-router.get("/post/:id", () => {});
-router.put("/post/:id", () => {});
-router.delete("/post/:id", () => {});
+router.post("/post", [createPostValidation, handleInputErrors], createPost);
+router.get("/post/:postId", getPost);
+router.put(
+	"/post/:postId",
+	[createPostValidation, handleInputErrors, checkIfEditable],
+	updatePost
+);
+router.delete("/post/:postId", checkIfEditable, deletePost);
 
 export default router;
