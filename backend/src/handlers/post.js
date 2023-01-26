@@ -41,8 +41,8 @@ export const createPost = async (req, res, next) => {
 		console.log(req.user);
 		const post = await prisma.post.create({
 			data: {
-				title: req.body.title,
-				description: req.body?.description,
+			
+				content: req.body?.content,
 				district: req.body?.district,
 				status: req.body?.status,
 				postedById: req.user.id,
@@ -89,8 +89,7 @@ export const updatePost = async (req, res, next) => {
 				id: req.params.postId,
 			},
 			data: {
-				title: req.body.title,
-				description: req.body?.description,
+				content: req.body?.content,
 				district: req.body?.district,
 				status: req.body?.status,
 				postedById: req.user.id,
@@ -137,3 +136,24 @@ export const getPostsByUser = async (req, res, next) => {
 		next(e);
 	}
 };
+
+export const getPostsByDistrict = async (req, res, next) => {
+	try {
+    const posts = await prisma.post.findMany({
+      where: {
+        district: req.params.districtCode,
+		},
+    });
+    if (posts.length === 0) {
+			const err = new Error("No posts found.");
+			err.type = "input";
+			err.code = 400;
+			next(err);
+		} else {
+			res.status(200);
+      res.json(posts);
+    }
+		} catch (e) {
+			next(e);
+		}
+	};

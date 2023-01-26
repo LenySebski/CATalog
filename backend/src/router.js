@@ -17,6 +17,7 @@ import {
 	deletePost,
 	getPost,
 	updatePost,
+  getPostsByDistrict,
 } from "./handlers/post.js";
 
 const router = Router();
@@ -35,6 +36,9 @@ router.delete("/user/:userId", isUserEditable, deleteUser);
 /**Get/Update Post */
 router.post("/post", [createPostValidation, handleInputErrors], createPost);
 router.get("/post/:postId", getPost);
+router.get("/posts/bydistrict/:districtCode", getPostsByDistrict);
+
+
 router.put(
 	"/post/:postId",
 	[createPostValidation, handleInputErrors, isPostEditable],
