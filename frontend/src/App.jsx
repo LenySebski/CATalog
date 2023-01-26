@@ -1,7 +1,8 @@
 import React from 'react';
 import './Style.scss'
 import Navbar from './Components/Navbar';
-import Cats from './Images/Cats.jpg';
+import LostPet from './Components/LostPet';
+import MainImg from './Components/MainImg';
 
 function App() {
   return (
@@ -9,7 +10,10 @@ function App() {
       <React.Fragment>
         <Navbar/>
       </React.Fragment>
-      <img className='mainimg' src={Cats}></img>
+      <MainImg/>
+      <LostPet/>
+
+
     </div>
   );
 }
