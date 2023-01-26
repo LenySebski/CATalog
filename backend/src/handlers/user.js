@@ -48,3 +48,82 @@ export const signIn = async (req, res, next) => {
 		next(e);
 	}
 };
+
+export const getUserById = async (req, res, next) => {
+	try {
+		const user = await prisma.user.findUnique({
+			where: {
+				id: req.params.userId,
+			},
+		});
+		res.json(user);
+	} catch (e) {
+		next(e);
+	}
+};
+
+export const isUserEditable = async (req, res, next) => {
+	try {
+		const user = await prisma.user.findUnique({
+			where: {
+				id: req.params.userId,
+			},
+			select: {
+				id: true,
+			},
+		});
+		if (user.id === req.user.id) {
+			next();
+		} else if (req.user.role === "ADMIN") {
+			next();
+		} else {
+			throw new Error("You are not authorized to edit this user");
+		}
+	} catch (e) {
+		e.code = 403;
+		e.type = "auth";
+		next(e);
+	}
+};
+
+export const updateUser = async (req, res, next) => {
+	try {
+		const user = await prisma.user.update({
+			where: {
+				id: req.params.userId,
+			},
+			data: {
+				username: req.body.username,
+				password: await hashPassword(req.body.password),
+				email: req.body.email,
+				phone: req.body.phone,
+				role: req.body.role,
+			},
+		});
+		res.json(user);
+	} catch (e) {
+		next(e);
+	}
+};
+
+export const deleteUser = async (req, res, next) => {
+	try {
+		const user = await prisma.user.delete({
+			where: {
+				id: req.params.userId,
+			},
+		});
+		res.json(user);
+	} catch (e) {
+		next(e);
+	}
+};
+
+export const getAllUsers = async (req, res, next) => {
+	try {
+		const users = await prisma.user.findMany();
+		res.json(users);
+	} catch (e) {
+		next(e);
+	}
+};

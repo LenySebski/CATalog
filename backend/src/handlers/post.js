@@ -57,6 +57,7 @@ export const createPost = async (req, res, next) => {
 	}
 };
 
+export const isPostEditable = async (req, res, next) => {
 export const checkIfEditable = async (req, res, next) => {
 	try {
 		const post = await prisma.post.findUnique({
