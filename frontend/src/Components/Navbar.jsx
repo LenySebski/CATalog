@@ -1,6 +1,4 @@
 import {useRef} from 'react';
-import {GiHamburgerMenu} from 'react-icons/gi';
-import {FaWindowClose} from 'react-icons/fa';
 import Logo from '../Images/Logo.png';
 import Line from '../Images/Line 5.png';
 

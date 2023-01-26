@@ -164,4 +164,14 @@ span {
   font-weight: bold;
   margin-right: 60px;
   margin-left: 0px;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 374px;
+  background-color: #457b9d;
+  color: #457b9d;
+  font-size: 20px;
 }/*# sourceMappingURL=Style.css.map */

@@ -186,3 +186,13 @@ span {
     margin-right: 60px;
     margin-left: 0px;
 }
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 374px;
+    background-color: color(secondary);
+    color: color(secondary);
+    font-size: 20px;
+}
