@@ -73,4 +73,10 @@ header .nav-btn {
   nav a {
     font-size: 1.5rem;
   }
+}
+.mainimg {
+  height: 130vh;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }/*# sourceMappingURL=Style.css.map */

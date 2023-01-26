@@ -1,5 +1,6 @@
 //$primaryBtn: #457b9d
 
+// Navbar starts
 *{
     padding: 0;
     margin: 0;
@@ -82,3 +83,12 @@ header .nav-btn {
         font-size: 1.5rem;
     }
 }
+// Navbar ends
+
+// Main Image starts
+.mainimg {
+    height: 130vh;
+    width: 100%;
+    object-fit: cover;
+}
+// Main Image ends
