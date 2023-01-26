@@ -1,29 +1,47 @@
 import { Router } from "express";
-
+import {
+	getAllUsers,
+	isUserEditable,
+	updateUser,
+	deleteUser,
+} from "./handlers/user.js";
+import { isAdmin } from "./middleware/auth.js";
+import {
+	handleInputErrors,
+	signUpValidation,
+} from "./middleware/validation.js";
+import {
+	isPostEditable,
+	createPost,
+	deletePost,
+	getPost,
+	updatePost,
+} from "./handlers/post.js";
+import {
+	handleInputErrors,
+	createPostValidation,
+} from "./middleware/validation.js";
 const router = Router();
 
 /**Get/Update User */
 
-router.get("/users", () => {});
-router.post("/user", () => {});
-router.get("/user/:id", () => {});
-router.put("/user/:id", () => {});
-router.delete("/user/:id", () => {});
-
-/**Get/Update Pet */
-router.get("/pets", (req, res) => {
-	res.json({ message: "Pets" });
-});
-router.post("/pet", () => {});
-router.get("/pet/:id", () => {});
-router.put("/pet/:id", () => {});
-router.put("/pet/:id", () => {});
+router.get("/users", isAdmin, getAllUsers);
+router.get("/user/:userId");
+router.put(
+	"/user/:userId",
+	[signUpValidation, handleInputErrors, isUserEditable],
+	updateUser
+);
+router.delete("/user/:userId", isUserEditable, deleteUser);
 
 /**Get/Update Post */
-router.get("/posts", () => {});
-router.post("/post", () => {});
-router.get("/post/:id", () => {});
-router.put("/post/:id", () => {});
-router.delete("/post/:id", () => {});
+router.post("/post", [createPostValidation, handleInputErrors], createPost);
+router.get("/post/:postId", getPost);
+router.put(
+	"/post/:postId",
+	[createPostValidation, handleInputErrors, isPostEditable],
+	updatePost
+);
+router.delete("/post/:postId", isPostEditable, deletePost);
 
 export default router;
