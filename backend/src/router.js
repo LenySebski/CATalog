@@ -9,6 +9,7 @@ import { isAdmin } from "./middleware/auth.js";
 import {
 	handleInputErrors,
 	signUpValidation,
+	createPostValidation,
 } from "./middleware/validation.js";
 import {
 	isPostEditable,
@@ -17,10 +18,7 @@ import {
 	getPost,
 	updatePost,
 } from "./handlers/post.js";
-import {
-	handleInputErrors,
-	createPostValidation,
-} from "./middleware/validation.js";
+
 const router = Router();
 
 /**Get/Update User */
