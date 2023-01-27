@@ -25,6 +25,21 @@ export const signUpValidation = [
 		.withMessage(
 			"Password is too weak. Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter and one number."
 		),
+	body("email")
+		.optional()
+		.isEmail()
+		.withMessage("Email is invalid. Please enter a valid email address."),
+	body("phone")
+		.optional()
+		.isMobilePhone()
+		.withMessage(
+			"Phone number is invalid. Please enter a valid phone number."
+		),
+	body("name")
+		.optional()
+		.isString()
+		.isLength({ min: 1 })
+		.withMessage("Name has to be a string and cannot be empty."),
 ];
 
 export const signInValidation = [
@@ -36,4 +51,24 @@ export const signInValidation = [
 		.trim()
 		.isLength({ min: 1 })
 		.withMessage("Password is required."),
+];
+
+export const createPostValidation = [
+	body("content")
+		.optional()
+		.isString()
+		.withMessage("Content must be a string"),
+	body("district")
+		.optional()
+		.trim()
+		.isLength({ eq: 3 })
+		.withMessage("District code must be 3 characters long"),
+	body("status")
+	.optional()
+		.isIn(["LOST", "FOUND", "ARCHIVED"])
+		.withMessage("Status must be either LOST, FOUND or ARCHIVED"),
+	body("imagesURL")
+		.optional()
+		.isArray()
+		.withMessage("ImagesURL must be an array of strings"),
 ];
