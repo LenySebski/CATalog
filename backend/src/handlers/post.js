@@ -1,25 +1,28 @@
-import prisma from "../db.js";
+// post.js is a file that contains all of our routes 
+// db.js is a file that contains prisma code to connect to the database. Prisma is used to connect to the database. Prisma is an open-source ORM for Node.js and TypeScript. It makes it easy to access data in a database from Node.js or TypeScript. 
+import prisma from "../db.js"; 
 
-export const getPosts = async (req, res, next) => {
-	try {
-		const posts = await prisma.post.findMany();
-		res.json(posts);
-	} catch (e) {
-		next(e);
+// getPosts is a function that returns all posts in the database 
+export const getPosts = async (req, res, next) => { // getPosts is an async function that takes 3 arguments, the request, the response, and the next function
+	try { // try is used to catch any errors that occur when trying to access the database 
+
+		const posts = await prisma.post.findMany(); // posts is a variable that is assigned to the result of the prisma.post.findMany() function, prisma.post.findMany() is a function that returns all posts in the database
+		res.json(posts); // res.json is used to send the result of the prisma.post.findMany() function to the client
+	} catch (e) { // catch is used to catch any errors that occur when trying to access the database 
+		next(e); // next is used to pass the error to the next middleware
 	}
 };
 
-export const getOriginalPoster = async (req, res, next) => {
+export const getOriginalPoster = async (req, res, next) => { 
 	try {
-		const post = await prisma.post.findUnique({
-			where: { id: req.params.postId },
-			select: {
-				postedById: true,
+		const post = await prisma.post.findUnique({ // prisma.post.findUnique is a function that returns a post with a specific id
+			where: { id: req.params.postId }, // where is a variable that is assigned to the result of the prisma.post.findUnique
+			select: { // select is a variable that is assigned to the result of the prisma.post.findUnique
+				postedById: true, 
 			},
 		});
-
-		next(post);
-	} catch (e) {
+			next(post); // next is used to pass the post to the next middleware
+		} catch (e) {
 		next(e);
 	}
 };
