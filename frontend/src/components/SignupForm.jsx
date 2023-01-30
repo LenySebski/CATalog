@@ -1,41 +1,41 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
-const SignupForm = () => {
-	//signup with username and password requred and email, phone and name optional
+export const SignupForm = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [email, setEmail] = useState("");
 	const [phone, setPhone] = useState("");
 	const [name, setName] = useState("");
 	const [error, setError] = useState(null);
-
-	const handleSubmit = (e) => {
+	const context = useContext(UserContext);
+	const navigate = useNavigate();
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const user = { username, password, email, phone, name };
-		fetch(`${import.meta.env.VITE_URL_BASE}/signup`, {
+		const res = await fetch(`${import.meta.env.VITE_URL_BASE}/signup`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(user),
-		})
-			.then((res) => {
-				if (!res.ok) {
-					console.log(res);
-					throw Error("Could not login");
-				}
-				return res.json();
-			})
-			.then((data) => {
-				setError(null);
-			})
-			.catch((err) => {
-				setError(err.message);
-			});
+		});
+		const data = await res.json();
+		console.log(data);
+		if (data.error) {
+			setError(data.error.errors);
+		} else {
+			context.setUser({ username, token: data.token });
+			alert("Signup successful! Redirecting to home page...");
+			setTimeout(() => {
+				navigate("/");
+			}, 3000);
+		}
 	};
-
 	return (
-		<div className='signup'>
+		<div className='login'>
+			{error && error.map((err) => <p>{err.msg}</p>)}
 			<h2>Signup</h2>
-			{error && <div>{error}</div>}
+
 			<form onSubmit={handleSubmit}>
 				<label>Username:</label>
 				<input
