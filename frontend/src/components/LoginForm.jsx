@@ -1,31 +1,21 @@
 import { useState } from "react";
 
-const LoginForm = () => {
+const LoginForm = ({ setUser }) => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(null);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const user = { username, password };
-		fetch(`${import.meta.env.VITE_URL_BASE}/signin`, {
+		const res = await fetch(`${import.meta.env.VITE_URL_BASE}/signin`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(user),
-		})
-			.then((res) => {
-				if (!res.ok) {
-					console.log(res);
-					throw Error("Could not login");
-				}
-				return res.json();
-			})
-			.then((data) => {
-				setError(null);
-			})
-			.catch((err) => {
-				setError(err.message);
-			});
+		});
+		const data = await res.json();
+		console.log(data);
+		setUser(data);
 	};
 
 	return (
