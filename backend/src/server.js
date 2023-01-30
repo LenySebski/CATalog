@@ -14,7 +14,8 @@ import {
 const app = express();
 
 const corsOptions = {
-	origin: "https://cors-testing-pvo8.onrender.com",
+	// origin: "https://cors-testing-pvo8.onrender.com",
+	origin: "*",
 	optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
