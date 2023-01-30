@@ -30,13 +30,17 @@ app.post("/signup", [signUpValidation, handleInputErrors], createNewUser);
 app.post("/signin", [signInValidation, handleInputErrors], signIn);
 
 app.use((err, req, res, next) => {
+	console.log(err);
 	if (err.type === "auth") {
 		res.status(err.code || 401).json({
 			error: { message: "Unauthorized access.", errors: err.errors },
 		});
 	} else if (err.type === "input") {
 		res.status(err.code || 400).json({
-			error: { message: "Request input error.", errors: err.errors },
+			error: {
+				message: err.message || "Request input error.",
+				errors: err.errors,
+			},
 		});
 	} else {
 		res.status(err.code || 500).json({
