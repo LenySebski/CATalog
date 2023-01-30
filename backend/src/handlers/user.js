@@ -44,7 +44,9 @@ export const signIn = async (req, res, next) => {
 		}
 	} catch (e) {
 		e.type = "input";
-		console.log("Error: ", e);
+		e.message = "Invalid username or password";
+		e.code = 400;
+		e.errors = [{ msg: "Invalid username or password" }];
 		next(e);
 	}
 };
