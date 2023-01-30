@@ -1,26 +1,30 @@
-import {useRef} from 'react';
-import Logo from '../Images/Logo.png';
-import Line from '../Images/Line 5.png';
-
+import Logo from "../Images/Logo.png";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 function Navbar() {
-    //The function of the button on click
-    const navRef = useRef();
-    const showNavbar = () => {
-        navRef.current.classList.toggle('responsive_nav')
-    }
-    return (
-        <header>
-            <img className='logo' src={Logo}></img>
-            <nav ref={navRef}>
-                <a href='/#'>Register Cat</a>
-                <a href='/#'>Database</a>
-                <a href='/#'>Sign In</a>
-                <img className='navline' src={Line}></img>
-                <a className='signup' href='/#'>Sign Up!</a>
-            </nav>
-        </header>
-    );
+	const { user, setUser } = useContext(UserContext);
 
+	return (
+		<header>
+			<img className='logo' src={Logo}></img>
+			<nav>
+				<Link className='home' to='/'>
+					Home
+				</Link>
+				{user?.username || null}
+
+				{user?.username && (
+					<a onClick={() => setUser(null)} to='#'>
+						Logout
+					</a>
+				)}
+				<Link className='login' to='/login'>
+					Login
+				</Link>
+			</nav>
+		</header>
+	);
 }
 
 export default Navbar;
