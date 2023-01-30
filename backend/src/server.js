@@ -13,7 +13,11 @@ import {
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+	origin: "https://cors-testing-pvo8.onrender.com",
+	optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
