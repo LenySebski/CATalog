@@ -17,6 +17,13 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(
+	express.static("./", {
+		setHeaders: function (res) {
+			res.set("Content-Security-Policy", "default-src 'self'");
+		},
+	})
+);
 
 app.get("/", (req, res) => {
 	console.log("We've got a request! on path: '/'");
