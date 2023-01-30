@@ -1,22 +1,47 @@
-import React from 'react';
-import './Style.scss'
-import Navbar from './Components/Navbar';
-import LostPet from './Components/LostPet';
-import MainImg from './Components/MainImg';
-import Footer from './Components/Footer';
+import React from "react";
+import "./Style.scss";
+import {
+	Route,
+	createBrowserRouter,
+	createRoutesFromElements,
+	defer,
+} from "react-router-dom";
+import HomePage from "./pages/Home";
+import LoginPage from "./pages/Login";
+import { UnprotectedLayout } from "./layouts/UnprotectedLayout";
+import { ProtectedLayout } from "./layouts/ProtectedLayout";
+import ProfilePage from "./pages/Profile";
+import NewPostPage from "./pages/NewPost";
+import { AuthLayout } from "./layouts/AuthLayout";
+import ErrorPage from "./pages/Error";
+import SignupPage from "./pages/Signup";
 
-function App() {
-  return (
-    <div className='Hello'>
-      <React.Fragment>
-        <Navbar/>
-      </React.Fragment>
-      <MainImg/>
-      <LostPet/>
-      <Footer/>
+const getUserData = () =>
+	new Promise((resolve) =>
+		setTimeout(() => {
+			const user = window.localStorage.getItem("user");
+			console.log("user", user);
+			resolve(user);
+		}, 6000)
+	);
 
+export const router = createBrowserRouter(
+	createRoutesFromElements(
+		<Route
+			errorElement={<ErrorPage />}
+			element={<AuthLayout />}
+			loader={() => defer({ userPromise: getUserData() })}
+		>
+			<Route element={<UnprotectedLayout />}>
+				<Route path='/' element={<HomePage />} />
+				<Route path='/login' element={<LoginPage />} />
+				<Route path='/signup' element={<SignupPage />} />
+			</Route>
 
-    </div>
-  );
-}
-export default App
+			<Route path='/auth' element={<ProtectedLayout />}>
+				<Route path='profile' element={<ProfilePage />} />
+				<Route path='newpost' element={<NewPostPage />} />
+			</Route>
+		</Route>
+	)
+);
