@@ -1,10 +1,11 @@
-import { useState } from "react";
-
-const LoginForm = ({ setUser }) => {
+import { useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
+const LoginForm = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(null);
 
+	const context = useContext(UserContext);
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const user = { username, password };
@@ -15,13 +16,17 @@ const LoginForm = ({ setUser }) => {
 		});
 		const data = await res.json();
 		console.log(data);
-		setUser(data);
+		if (data.error) {
+			setError(data.errors);
+		} else {
+			context.setUser({ username, token: data.token });
+		}
 	};
 
 	return (
 		<div className='login'>
+			{error && error.map((err) => <p>{err}</p>)}
 			<h2>Login</h2>
-			{error && <div>{error}</div>}
 			<form onSubmit={handleSubmit}>
 				<label>Username:</label>
 				<input
