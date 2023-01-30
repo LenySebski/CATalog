@@ -31,11 +31,20 @@ app.post("/signin", [signInValidation, handleInputErrors], signIn);
 
 app.use((err, req, res, next) => {
 	if (err.type === "auth") {
-		res.status(err.code || 401).json({ message: err.message });
+		res.status(err.code || 401).json({
+			message: "Unauthorized access.",
+			errors: err.errors,
+		});
 	} else if (err.type === "input") {
-		res.status(err.code || 400).json({ message: err.message });
+		res.status(err.code || 400).json({
+			message: "Request input error.",
+			errors: err.errors,
+		});
 	} else {
-		res.status(err.code || 500).json({ message: err.message });
+		res.status(err.code || 500).json({
+			message: "Server Error.",
+			error: err.errors,
+		});
 	}
 });
 export default app;
