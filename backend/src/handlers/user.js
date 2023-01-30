@@ -38,7 +38,11 @@ export const signIn = async (req, res, next) => {
 		});
 		if (user && (await comparePassword(req.body.password, user.password))) {
 			const token = createToken(user);
-			res.json({ token });
+			res.set({
+				"Access-Control-Allow-Origin": "*",
+				"Access-Control-Allow-Methods": "DELETE,GET,PATCH,POST,PUT",
+				"Access-Control-Allow-Headers": "Content-Type,Authorization",
+			}).json({ token });
 		} else {
 			throw new Error("Invalid username or password");
 		}
