@@ -1,22 +1,28 @@
-import React from 'react';
-import './Style.scss'
-import Navbar from './Components/Navbar';
-import LostPet from './Components/LostPet';
-import MainImg from './Components/MainImg';
-import Footer from './Components/Footer';
+import React, { useState } from "react";
+import "./Style.scss";
+import { LoginPage } from "./pages/Login";
+import { HomePage } from "./pages/Home";
+import { NewPostPage } from "./pages/NewPost";
+import { createBrowserRouter } from "react-router-dom";
+import { RootLayout } from "./layouts/RootLayout";
 
-function App() {
-  return (
-    <div className='Hello'>
-      <React.Fragment>
-        <Navbar/>
-      </React.Fragment>
-      <MainImg/>
-      <LostPet/>
-      <Footer/>
-
-
-    </div>
-  );
-}
-export default App
+export const router = createBrowserRouter([
+	{
+		path: "/",
+		element: <RootLayout />,
+		children: [
+			{
+				path: "/",
+				element: <HomePage />,
+			},
+			{
+				path: "/login",
+				element: <LoginPage />,
+			},
+			{
+				path: "/newPost",
+				element: <NewPostPage />,
+			},
+		],
+	},
+]);
