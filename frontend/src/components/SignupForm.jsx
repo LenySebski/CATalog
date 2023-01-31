@@ -24,7 +24,7 @@ export const SignupForm = () => {
 		if (data.error) {
 			setError(data.error.errors);
 		} else {
-			context.setUser({ username, token: data.token });
+			context.setUser({ user: data.user, token: data.token });
 			alert("Signup successful! Redirecting to home page...");
 			setTimeout(() => {
 				navigate("/");
