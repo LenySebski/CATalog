@@ -1,10 +1,10 @@
-import React, { useState } from "react";
 import "./Style.scss";
 import { LoginPage } from "./pages/Login";
 import { HomePage } from "./pages/Home";
 import { NewPostPage } from "./pages/NewPost";
 import { createBrowserRouter } from "react-router-dom";
 import { RootLayout } from "./layouts/RootLayout";
+import { SignupPage } from "./pages/Signup";
 
 export const router = createBrowserRouter([
 	{
@@ -18,6 +18,10 @@ export const router = createBrowserRouter([
 			{
 				path: "/login",
 				element: <LoginPage />,
+			},
+			{
+				path: "/signup",
+				element: <SignupPage />,
 			},
 			{
 				path: "/newPost",
