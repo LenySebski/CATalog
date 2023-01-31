@@ -4,24 +4,33 @@ import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 function Navbar() {
 	const { user, setUser } = useContext(UserContext);
-
 	return (
-		<header>
-			<img className='logo' src={Logo}></img>
-			<nav>
-				<Link className='home' to='/'>
-					Home
-				</Link>
-				{user?.username || null}
-
-				{user?.username && (
-					<a onClick={() => setUser(null)} to='#'>
-						Logout
-					</a>
+		<header className='navbar__wrapper'>
+			<img className='navbar__logo-image' src={Logo}></img>
+			<nav className='navbar__container'>
+				{user?.user && (
+					<Link to='/newpost'>
+						<span className='navbar__link'>Register cat</span>
+					</Link>
 				)}
-				<Link className='login' to='/login'>
-					Login
+				<Link to='/'>
+					<span className='navbar__link'>Home</span>
 				</Link>
+
+				{user?.user ? (
+					<a onClick={() => setUser(null)} to='#'>
+						<span className='navbar__link'>Logout</span>
+					</a>
+				) : (
+					<>
+						<Link to='/login'>
+							<span className='navbar__link'>Sign In</span>
+						</Link>
+						<Link to='/signup'>
+							<span className='navbar__link'>Sign Up!</span>
+						</Link>
+					</>
+				)}
 			</nav>
 		</header>
 	);

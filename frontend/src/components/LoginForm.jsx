@@ -1,10 +1,12 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 const LoginForm = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(null);
-
+	const [notification, setNotification] = useState(null);
+	const navigate = useNavigate();
 	const context = useContext(UserContext);
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -17,32 +19,49 @@ const LoginForm = () => {
 		const data = await res.json();
 		console.log(data);
 		if (data.error) {
-			setError(data.errors);
+			setError(data.error);
 		} else {
-			context.setUser({ username, token: data.token });
+			context.setUser({ user: data.user, token: data.token });
+			setNotification("Login successful! Redirecting to home page...");
+			setTimeout(() => {
+				navigate("/");
+			}, 1500);
 		}
 	};
 
 	return (
-		<div className='login'>
-			{error && error.map((err) => <p>{err}</p>)}
-			<h2>Login</h2>
-			<form onSubmit={handleSubmit}>
-				<label>Username:</label>
+		<div className='form__wrapper'>
+			<h2 className='form__header'>Sign In</h2>
+			<form onSubmit={handleSubmit} className='form__container'>
+				<label className='form__label'>Username</label>
 				<input
+					className='form__input'
 					type='text'
 					required
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
 				/>
-				<label>Password:</label>
+				<label className='form__label'>Password</label>
 				<input
+					className='form__input'
 					type='password'
 					required
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
-				<button>Login</button>
+				<button className='form__btn--primary'>Login</button>
+				{error && (
+					<div className='form__error-container'>
+						<span className='form__error-text'>{error.message}</span>
+					</div>
+				)}
+				{notification && (
+					<div className='form__notification-container'>
+						<span className='form__notification-text'>
+							{notification}
+						</span>
+					</div>
+				)}
 			</form>
 		</div>
 	);

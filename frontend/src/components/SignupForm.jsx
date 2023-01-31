@@ -9,6 +9,7 @@ export const SignupForm = () => {
 	const [phone, setPhone] = useState("");
 	const [name, setName] = useState("");
 	const [error, setError] = useState(null);
+	const [notification, setNotification] = useState(null);
 	const context = useContext(UserContext);
 	const navigate = useNavigate();
 	const handleSubmit = async (e) => {
@@ -25,51 +26,69 @@ export const SignupForm = () => {
 			setError(data.error.errors);
 		} else {
 			context.setUser({ username, token: data.token });
-			alert("Signup successful! Redirecting to home page...");
+			setNotification("Signup successful! Redirecting to home page...");
 			setTimeout(() => {
 				navigate("/");
-			}, 3000);
+			}, 2500);
 		}
 	};
 	return (
-		<div className='login'>
-			{error && error.map((err) => <p>{err.msg}</p>)}
-			<h2>Signup</h2>
+		<div className='form__wrapper'>
+			<h2 className='form__header'>Signup</h2>
 
-			<form onSubmit={handleSubmit}>
-				<label>Username:</label>
+			<form onSubmit={handleSubmit} className='form__container'>
+				<label className='form__label'>Username</label>
 				<input
+					className='form__input'
 					type='text'
 					required
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
 				/>
-				<label>Password:</label>
+				<label className='form__label'>Password</label>
 				<input
+					className='form__input'
 					type='password'
 					required
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
-				<label>Email:</label>
+				<label className='form__label'>Email</label>
 				<input
+					className='form__input'
 					type='email'
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 				/>
-				<label>Phone:</label>
+				<label className='form__label'>Phone</label>
 				<input
+					className='form__input'
 					type='tel'
 					value={phone}
 					onChange={(e) => setPhone(e.target.value)}
 				/>
-				<label>Name:</label>
+				<label className='form__label'>Name</label>
 				<input
+					className='form__input'
 					type='text'
 					value={name}
 					onChange={(e) => setName(e.target.value)}
 				/>
-				<button>Signup</button>
+				<button className='form__btn--primary'>Signup</button>
+				{error && (
+					<div className='form__error-container'>
+						{error.map((err) => (
+							<span className='form__error-text'>{err.msg}</span>
+						))}
+					</div>
+				)}
+				{notification && (
+					<div className='form__notification-container'>
+						<span className='form__notification-text'>
+							{notification}
+						</span>
+					</div>
+				)}
 			</form>
 		</div>
 	);
