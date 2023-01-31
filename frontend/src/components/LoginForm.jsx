@@ -19,7 +19,7 @@ const LoginForm = () => {
 		if (data.error) {
 			setError(data.errors);
 		} else {
-			context.setUser({ username, token: data.token });
+			context.setUser({ user: data.user, token: data.token });
 		}
 	};
 
