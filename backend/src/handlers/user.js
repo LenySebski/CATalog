@@ -22,7 +22,10 @@ export const createNewUser = async (req, res, next) => {
 			},
 		});
 		const token = createToken(user);
-		return res.json({ token });
+		return res.json({
+			token,
+			user: { username: user.username, id: user.id, role: user.role },
+		});
 	} catch (e) {
 		e.type = "input";
 		next(e);
@@ -38,7 +41,10 @@ export const signIn = async (req, res, next) => {
 		});
 		if (user && (await comparePassword(req.body.password, user.password))) {
 			const token = createToken(user);
-			res.json({ token });
+			res.json({
+				token,
+				user: { username: user.username, id: user.id, role: user.role },
+			});
 		} else {
 			throw new Error("Invalid username or password");
 		}

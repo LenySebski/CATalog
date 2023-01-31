@@ -22,10 +22,12 @@ const LoginForm = () => {
 			setError(data.error);
 		} else {
 			context.setUser({ user: data.user, token: data.token });
+
 			setNotification("Login successful! Redirecting to home page...");
 			setTimeout(() => {
 				navigate("/");
 			}, 1500);
+
 		}
 	};
 
