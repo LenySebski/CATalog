@@ -19,8 +19,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-	console.log("We've got a request! on path: '/'");
-	res.json({ message: "hello" });
+	console.log("Health check...");
+	res.json({ ok: true, message: "Still alive!" });
 	res.status(200);
 });
 app.use("/posts/:userId", getPostsByUser);
