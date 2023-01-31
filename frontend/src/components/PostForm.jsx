@@ -2,12 +2,13 @@ import { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 
 export const PostForm = () => {
-	const { user, setUser } = useContext(UserContext);
+	const { user } = useContext(UserContext);
 
 	const [content, setContent] = useState("");
 	const [district, setDistrict] = useState("");
 	const [image, setImage] = useState("");
 	const [error, setError] = useState(null);
+	const [notification, setNotification] = useState(null);
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const post = { content, district, image };
@@ -20,40 +21,50 @@ export const PostForm = () => {
 			body: JSON.stringify(post),
 		});
 		const data = await res.json();
-		console.log(data);
+		console.log(data.error);
 		if (data.error) {
-			setError(data.errors);
+			setError(data.error);
+			console.log(error);
 		} else {
-			context.setUser({ username, token: data.token });
+			setNotification("Posted successfuly! Redirecting to home page...");
+			setTimeout(() => {
+				window.location.reload();
+			}, 2500);
 		}
 	};
 	//form to create a post with optional content,district and image
 	return (
-		<div className='post'>
-			<h2>Post</h2>
-			<form onSubmit={handleSubmit}>
-				<label>Content:</label>
+		<div className='form__wrapper'>
+			<h2 className='form__header'>Post</h2>
+			<form onSubmit={handleSubmit} className='form__container'>
+				<label className='form__label'>Content</label>
 				<input
-					type='text'
+					className='form__input'
 					required
+					type='text'
 					value={content}
 					onChange={(e) => setContent(e.target.value)}
 				/>
-				<label>District:</label>
+				<label className='form__label'>District</label>
 				<input
+					className='form__input'
 					type='text'
-					required
 					value={district}
 					onChange={(e) => setDistrict(e.target.value)}
 				/>
-				<label>Image URL:</label>
+				<label className='form__label'>Image URL</label>
 				<input
+					className='form__input'
 					type='text'
-					required
 					value={image}
 					onChange={(e) => setImage(e.target.value)}
 				/>
-				<button>Post</button>
+				<button className='form__btn--primary'>Post</button>
+				{error && (
+					<div className='form__error-container'>
+						<span className='form__error-text'>{error?.message}</span>
+					</div>
+				)}
 			</form>
 		</div>
 	);
