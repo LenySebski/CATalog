@@ -27,13 +27,15 @@ const LoginForm = () => {
 			setTimeout(() => {
 				navigate("/");
 			}, 1500);
-
 		}
 	};
 
 	return (
 		<div className='form__wrapper'>
-			<h2 className='form__header'>Sign In</h2>
+			<h2 className='form__header'>Sign In!</h2>
+			<h3 className='form__subheader'>
+				And start reuniting cats and their owners today!
+			</h3>
 			<form onSubmit={handleSubmit} className='form__container'>
 				<label className='form__label'>Username</label>
 				<input
@@ -51,7 +53,7 @@ const LoginForm = () => {
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
-				<button className='form__btn--primary'>Login</button>
+				<button className='form__btn--primary'>Sign in!</button>
 				{error && (
 					<div className='form__error-container'>
 						<span className='form__error-text'>{error.message}</span>
