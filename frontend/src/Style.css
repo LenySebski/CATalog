@@ -82,6 +82,14 @@ html {
   background-color: #ffffff;
   outline: none;
 }
+.form__radio-input {
+  border-radius: 0;
+}
+.form__radio-label {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #457b9d;
+}
 .form__label {
   font-size: 1.4rem;
   color: #457b9d;

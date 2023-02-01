@@ -70,8 +70,8 @@ export const createPostValidation = [
 		.escape()
 		.optional({ checkFalsy: true })
 		.trim()
-		.isLength({ eq: 3 })
-		.withMessage("District code must be 3 characters long"),
+		.isLength({ min: 3, max: 3 })
+		.withMessage("District (postal code) must be 3 characters long"),
 	body("status")
 		.escape()
 		.optional({ checkFalsy: true })
@@ -80,6 +80,8 @@ export const createPostValidation = [
 	body("imagesURL")
 		.escape()
 		.optional({ checkFalsy: true })
+
 		.isURL({ protocols: ["http", "https"] })
 		.withMessage("ImageURL must be a valid URL adresses"),
+
 ];
