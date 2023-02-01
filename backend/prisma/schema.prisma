@@ -43,6 +43,7 @@ model Post {
   content  String?  @db.VarChar(255)
   district     String?  @db.VarChar(255)
   status        Status @default(LOST)
-  imagesURL String[]
+  imageURL String?
+ 
   @@unique([id, postedById])
 }
