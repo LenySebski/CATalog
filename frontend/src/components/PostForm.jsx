@@ -21,10 +21,9 @@ export const PostForm = () => {
 			body: JSON.stringify(post),
 		});
 		const data = await res.json();
-		console.log(data.error);
 		if (data.error) {
 			setError(data.error);
-			console.log(error);
+			console.error(error);
 		} else {
 			setNotification("Posted successfuly! Redirecting to home page...");
 			setTimeout(() => {
@@ -60,6 +59,13 @@ export const PostForm = () => {
 					onChange={(e) => setImage(e.target.value)}
 				/>
 				<button className='form__btn--primary'>Post</button>
+				{notification && (
+					<div className='form__notification-container'>
+						<span className='form__notification-text'>
+							{notification}
+						</span>
+					</div>
+				)}
 				{error && (
 					<div className='form__error-container'>
 						<span className='form__error-text'>{error?.message}</span>
