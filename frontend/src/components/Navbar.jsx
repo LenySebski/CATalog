@@ -8,27 +8,17 @@ function Navbar() {
 		<header className='navbar__wrapper'>
 			<img className='navbar__logo-image' src={Logo}></img>
 			<nav className='navbar__container'>
-				{user?.user && (
-					<Link to='/newpost'>
-						<span className='navbar__link'>Register cat</span>
-					</Link>
-				)}
-				<Link to='/'>
-					<span className='navbar__link'>Home</span>
-				</Link>
+				{user?.user && <Link to='/newpost'>Register cat</Link>}
+				<Link to='/'>Home</Link>
 
 				{user?.user ? (
 					<a onClick={() => setUser(null)} to='#'>
-						<span className='navbar__link'>Logout</span>
+						Logout
 					</a>
 				) : (
 					<>
-						<Link to='/login'>
-							<span className='navbar__link'>Sign In</span>
-						</Link>
-						<Link to='/signup'>
-							<span className='navbar__link'>Sign Up!</span>
-						</Link>
+						<Link to='/login'>Sign In</Link>
+						<Link to='/signup'>Sign Up!</Link>
 					</>
 				)}
 			</nav>

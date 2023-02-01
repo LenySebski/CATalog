@@ -25,8 +25,7 @@ export const SignupForm = () => {
 		if (data.error) {
 			setError(data.error.errors);
 		} else {
-      
-			context.setUser({ user:data.user, token: data.token });
+			context.setUser({ user: data.user, token: data.token });
 			setNotification("Signup successful! Redirecting to home page...");
 
 			setTimeout(() => {
@@ -36,10 +35,13 @@ export const SignupForm = () => {
 	};
 	return (
 		<div className='form__wrapper'>
-			<h2 className='form__header'>Signup</h2>
+			<h2 className='form__header'>Sign up!</h2>
+			<h3 className='form__subheader'>
+				And start reuniting cats and their owners today!
+			</h3>
 
 			<form onSubmit={handleSubmit} className='form__container'>
-				<label className='form__label'>Username</label>
+				<label className='form__label'>Username*</label>
 				<input
 					className='form__input'
 					type='text'
@@ -47,7 +49,7 @@ export const SignupForm = () => {
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
 				/>
-				<label className='form__label'>Password</label>
+				<label className='form__label'>Password*</label>
 				<input
 					className='form__input'
 					type='password'
@@ -76,7 +78,7 @@ export const SignupForm = () => {
 					value={name}
 					onChange={(e) => setName(e.target.value)}
 				/>
-				<button className='form__btn--primary'>Signup</button>
+				<button className='form__btn--primary'>Sign up!</button>
 				{error && (
 					<div className='form__error-container'>
 						{error.map((err) => (
