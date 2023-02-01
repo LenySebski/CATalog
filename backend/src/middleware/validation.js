@@ -80,6 +80,8 @@ export const createPostValidation = [
 	body("imagesURL")
 		.escape()
 		.optional({ checkFalsy: true })
-		.isArray()
-		.withMessage("ImagesURL must be an array of URL adresses"),
+
+		.isURL({ protocols: ["http", "https"] })
+		.withMessage("ImageURL must be a valid URL adresses"),
+
 ];
