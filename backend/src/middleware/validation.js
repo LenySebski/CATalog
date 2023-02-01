@@ -70,8 +70,8 @@ export const createPostValidation = [
 		.escape()
 		.optional({ checkFalsy: true })
 		.trim()
-		.isLength({ eq: 3 })
-		.withMessage("District code must be 3 characters long"),
+		.isLength({ min: 3, max: 3 })
+		.withMessage("District (postal code) must be 3 characters long"),
 	body("status")
 		.escape()
 		.optional({ checkFalsy: true })
@@ -81,5 +81,5 @@ export const createPostValidation = [
 		.escape()
 		.optional({ checkFalsy: true })
 		.isArray()
-		.withMessage("ImagesURL must be an array of strings"),
+		.withMessage("ImagesURL must be an array of URL adresses"),
 ];

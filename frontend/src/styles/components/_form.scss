@@ -36,6 +36,14 @@
 		background-color: colors.color(white);
 		outline: none;
 	}
+	&__radio-input {
+		border-radius: 0;
+	}
+	&__radio-label {
+		font-size: 1.3rem;
+		font-weight: 700;
+		color: colors.color(secondary);
+	}
 	&__label {
 		font-size: 1.4rem;
 
