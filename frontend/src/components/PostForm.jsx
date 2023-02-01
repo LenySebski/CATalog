@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export const PostForm = () => {
 	const { user } = useContext(UserContext);
-
+	const navigate = useNavigate();
 	const [content, setContent] = useState("");
 	const [district, setDistrict] = useState("");
 	const [image, setImage] = useState("");
@@ -27,7 +28,7 @@ export const PostForm = () => {
 		} else {
 			setNotification("Posted successfuly! Redirecting to home page...");
 			setTimeout(() => {
-				window.location.reload();
+				navigate("/");
 			}, 2500);
 		}
 	};
