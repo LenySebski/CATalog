@@ -13,7 +13,7 @@ export const PostForm = () => {
 	const [notification, setNotification] = useState(null);
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const post = { content, district, image, status };
+		const post = { content, district, imageURL: image, status };
 		const res = await fetch(`${import.meta.env.VITE_URL_BASE}/api/post`, {
 			method: "POST",
 			headers: {
