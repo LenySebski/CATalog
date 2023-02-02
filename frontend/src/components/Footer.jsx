@@ -29,10 +29,10 @@ function Footer() {
 			<div className="footer__column3">
 				<h4 className="footer__contact">Contact Us</h4>
 				<a href="catalog@catalog.com" className="footer__email">catalog@catalog.com</a>
-				<a href="www.facebook.com">
+				<a className="footer__social" href="www.facebook.com">
 					<FontAwesomeIcon icon={faFacebook} />
 				</a>
-				<a href="www.instagram.com">
+				<a className="footer__social" href="www.instagram.com">
 					<FontAwesomeIcon icon={faInstagram} />
 				</a>
 			</div>
