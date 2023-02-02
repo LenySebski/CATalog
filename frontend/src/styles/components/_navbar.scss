@@ -2,11 +2,10 @@
 .navbar {
 	&__wrapper {
 		background-color: colors.color(secondary);
-
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		height: 8vh;
+		height: 10vh;
 		background-color: colors.color(secondary);
 		color: colors.color(secondary);
 		font-size: 20px;

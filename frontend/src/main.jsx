@@ -6,6 +6,7 @@ import { UserContextProvider } from "./context/UserContext";
 import "@fontsource/lato/900.css";
 import "@fontsource/lato/700.css";
 import "@fontsource/lato/400.css";
+import "@fontsource/lato/100.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
