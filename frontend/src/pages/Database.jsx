@@ -1,5 +1,5 @@
 import { PostList } from "../components/PostList";
-
+import videoBg from "../assets/video-bg4.mp4";
 export const DatabasePage = () => {
 	return (
 		<div className='layout__wrapper--columns'>

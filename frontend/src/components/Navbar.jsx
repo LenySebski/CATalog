@@ -6,10 +6,12 @@ function Navbar() {
 	const { user, setUser } = useContext(UserContext);
 	return (
 		<header className='navbar__wrapper'>
-			<img className='navbar__logo-image' src={Logo}></img>
+			<Link to='/'>
+				<img className='navbar__logo-image' src={Logo}></img>
+			</Link>
 			<nav className='navbar__container'>
 				{user?.user && <Link to='/newpost'>Register cat</Link>}
-				<Link to='/'>Home</Link>
+				<Link to='/database'>database</Link>
 
 				{user?.user ? (
 					<a onClick={() => setUser(null)} to='#'>

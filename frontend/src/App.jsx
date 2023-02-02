@@ -5,6 +5,7 @@ import { NewPostPage } from "./pages/NewPost";
 import { createBrowserRouter } from "react-router-dom";
 import { RootLayout } from "./layouts/RootLayout";
 import { SignupPage } from "./pages/Signup";
+import { DatabasePage } from "./pages/Database";
 
 export const router = createBrowserRouter([
 	{
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
 			{
 				path: "/newPost",
 				element: <NewPostPage />,
+			},
+			{
+				path: "/database",
+				element: <DatabasePage />,
 			},
 		],
 	},
