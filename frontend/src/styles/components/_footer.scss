@@ -1,0 +1,12 @@
+@use "../abstracts/colors" as colors;
+
+.footer {
+    &__wrapper {
+        background-color: colors.color(secondary);
+        color: colors.color(white);
+        display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-size: 20px;
+    }
+}
