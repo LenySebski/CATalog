@@ -136,6 +136,60 @@ video {
   color: rgba(255, 255, 255, 0.7);
 }
 
+.footer__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6rem;
+  background-color: #457b9d;
+  color: #ffffff;
+  height: 30vh;
+  padding: 20px;
+}
+.footer__column1 {
+  max-width: 300px;
+  padding-left: 4rem;
+}
+.footer__logo-image {
+  padding-bottom: 2rem;
+}
+.footer__description {
+  font-size: 14px;
+}
+.footer__column2 {
+  max-width: 300px;
+  justify-content: left;
+}
+.footer__column2 a {
+  font-size: 14px;
+  color: #ffffff;
+  display: block;
+  padding: 5px;
+}
+.footer__menu {
+  font-size: 20px;
+}
+.footer__column3 {
+  display: block;
+  padding: 5px;
+  margin-right: 4rem;
+}
+.footer__contact {
+  font-size: 20px;
+  display: block;
+}
+.footer__email {
+  display: block;
+  font-size: 14px;
+  color: #ffffff;
+  padding: 10px;
+}
+.footer__social {
+  font-size: 30px;
+  color: #ffffff;
+  padding: 5px;
+}
+
 .layout__wrapper--columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
