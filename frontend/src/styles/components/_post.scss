@@ -6,6 +6,7 @@
 		grid-gap: 4rem;
 	}
 	&__card {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -32,6 +33,49 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+	}
+	&__button {
+		margin: 10% 10%;
+		&-container {
+			position: absolute;
+			bottom: 0%;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 50%;
+			display: flex;
+			justify-content: space-between;
+		}
+		&-edit {
+			background-color: green;
+			color: white;
+			border: none;
+			border-radius: 50%;
+			width: 3rem;
+			height: 3rem;
+			transition: all 0.3s ease;
+			&:hover {
+				background-color: #00ff00;
+				transform: scale(1.1);
+			}
+		}
+		&-edit:disabled {
+			background-color: #e1e1e1;
+			transform: scale(1.1);
+			opacity: 0.5;
+		}
+		&-delete {
+			background-color: red;
+			color: white;
+			border: none;
+			border-radius: 50%;
+			width: 3rem;
+			height: 3rem;
+			transition: all 0.3s ease;
+			&:hover {
+				background-color: #ff0000;
+				transform: scale(1.1);
+			}
+		}
 	}
 	&__overlay {
 		position: absolute;

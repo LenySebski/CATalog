@@ -128,3 +128,5 @@ dist
 
 # React Component Preview
 previewConfig.json
+
+.vscode
