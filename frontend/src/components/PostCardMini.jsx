@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { useMutation, useQueryClient } from "react-query";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 export const PostCardMini = ({ post }) => {
 	const { user } = useContext(UserContext);
@@ -48,16 +50,19 @@ export const PostCardMini = ({ post }) => {
 			<div className='post__button-container'>
 				{(user?.user.id === postedById || user?.user.role === "ADMIN") && (
 					<button
-						className='post__button-edit'
+						className='post__button post__button-edit'
 						disabled
 						onClick={deletePost}
 					>
-						Edit
+						<FontAwesomeIcon icon={faPenToSquare} />
 					</button>
 				)}
 				{(user?.user.id === postedById || user?.user.role === "ADMIN") && (
-					<button className='post__button-delete' onClick={deletePost}>
-						Delete
+					<button
+						className='post__button post__button-delete'
+						onClick={deletePost}
+					>
+						<FontAwesomeIcon icon={faTrashCan} />
 					</button>
 				)}
 			</div>
