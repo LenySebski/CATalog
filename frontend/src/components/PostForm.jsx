@@ -29,7 +29,7 @@ export const PostForm = () => {
 		} else {
 			setNotification("Posted successfuly! Redirecting to home page...");
 			setTimeout(() => {
-				navigate("/");
+				navigate("/database");
 			}, 2500);
 		}
 	};
