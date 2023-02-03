@@ -3,10 +3,11 @@ import { UserContext } from "../context/UserContext";
 import { useMutation, useQueryClient } from "react-query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import placeholderImage from "../assets/placeholder.svg";
 
 export const PostCardMini = ({ post }) => {
 	const { user } = useContext(UserContext);
-	const { postedById, content, district, imageURL, status } = post;
+	const { postedById, district, imageURL, status } = post;
 	const queryClient = useQueryClient();
 
 	const { mutate: deletePost } = useMutation(
@@ -32,6 +33,11 @@ export const PostCardMini = ({ post }) => {
 	return (
 		<div className='post__card'>
 			<div className='post__image-container'>
+				<img
+					className='post__image-placeholder'
+					src={placeholderImage}
+					alt='CATalog logo'
+				/>
 				<div className='post__overlay'></div>
 				<div className='post__overlay-text'>
 					<h3>
@@ -42,7 +48,6 @@ export const PostCardMini = ({ post }) => {
 						)}
 						in {district}
 					</h3>
-					<p className='post__content-text'>{content}</p>
 				</div>
 				<img className='post__image' src={imageURL} alt='post' />
 			</div>
